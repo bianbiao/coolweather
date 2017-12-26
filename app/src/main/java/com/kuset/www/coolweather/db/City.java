@@ -15,13 +15,13 @@ public class City extends DataSupport{
         return id;
     }
     public void setId(int id){
-        return id;
+        this.id=id;
     }
     public String getCityName(){
         return cityName;
     }
-    public  String SetCityName(String cityName){
-        this.cityName=cityName;
+    public void setCityName(String cityName){
+        this.cityName = cityName;
     }
     public int getCityCode(){
         return cityCode;
