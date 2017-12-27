@@ -134,6 +134,8 @@ public class ChooseAreaFragment extends Fragment {
                 }
             }
         });
+//       queryFromServer("http://guolin.tech/api/china", "province");
+        Log.d(TAG,"进入遍历省数据");
         queryProvinces();
     }
 
@@ -143,9 +145,12 @@ public class ChooseAreaFragment extends Fragment {
     private void queryProvinces() {
         titleText.setText("中国");
         backButton.setVisibility(View.GONE);
+        Log.d(TAG,"查询所有省数据");
         provinceList = DataSupport.findAll(Province.class);
+        Log.d(TAG,"查询成功所有省数据");
         if (provinceList.size() > 0) {
             dataList.clear();
+            Log.d(TAG,"queryProvinces-------------------------");
             for (Province province : provinceList) {
                 dataList.add(province.getProvinceName());
             }
@@ -174,6 +179,7 @@ public class ChooseAreaFragment extends Fragment {
             listView.setSelection(0);
             currentLevel = LEVEL_CITY;
         } else {
+            Log.d(TAG,"网上取数据");
             int provinceCode = selectedProvince.getProvinceCode();
             String address = "http://guolin.tech/api/china/" + provinceCode;
             queryFromServer(address, "city");
@@ -211,6 +217,7 @@ public class ChooseAreaFragment extends Fragment {
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+//                Toast.makeText(getContext(),"network",Toast.LENGTH_SHORT).show();
                 String responseText = response.body().string();
                     boolean result = false;
                 if ("province".equals(type)) {
